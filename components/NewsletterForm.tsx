@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 type Props = {
-  onGenerated: (data: { subject: string; body: string; cta: string }) => void
+  onGenerated: (data: { subject: string; shortBody: string;longBody:string; cta: string }) => void
 }
 
 async function postJSON(url: string, { arg }: { arg: any }) {
@@ -20,10 +20,11 @@ async function postJSON(url: string, { arg }: { arg: any }) {
     body: JSON.stringify(arg),
   })
   if (!res.ok) throw new Error(await res.text())
-  return (await res.json()) as { subject: string; body: string; cta: string }
+  return (await res.json()) as { subject: string; shortBody: string;longBody:string; cta: string }
 }
 
 export default function NewsletterForm({ onGenerated }: Props) {
+  const [companyName, setCompanyName] = useState("")
   const [audience, setAudience] = useState("")
   const [topic, setTopic] = useState("")
   const [tone, setTone] = useState("Friendly")
@@ -47,6 +48,15 @@ export default function NewsletterForm({ onGenerated }: Props) {
           placeholder="e.g., Startup founders"
           value={audience}
           onChange={(e) => setAudience(e.target.value)}
+        />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="audience">Company Name</Label>
+        <Input
+          id="companyName"
+          placeholder="e.g., TechCorp"
+          value={companyName}
+          onChange={(e) => setCompanyName(e.target.value)}
         />
       </div>
       <div className="grid gap-2">

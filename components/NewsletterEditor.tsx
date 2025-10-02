@@ -6,7 +6,8 @@ import { Textarea } from "@/components/ui/textarea"
 
 export type EditorValue = {
   subject: string
-  body: string
+  shortBody: string
+  longBody: string
   cta: string
 }
 
@@ -23,12 +24,21 @@ export default function NewsletterEditor({ value, onChange }: Props) {
         <Input id="subject" value={value.subject} onChange={(e) => onChange({ ...value, subject: e.target.value })} />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="body">Body</Label>
+        <Label htmlFor="body">Short Body</Label>
         <Textarea
           id="body"
           className="min-h-[220px]"
-          value={value.body}
-          onChange={(e) => onChange({ ...value, body: e.target.value })}
+          value={value.shortBody}
+          onChange={(e) => onChange({ ...value, shortBody: e.target.value })}
+        />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="body">Long Body</Label>
+        <Textarea
+          id="body"
+          className="min-h-[220px]"
+          value={value.longBody}
+          onChange={(e) => onChange({ ...value, longBody: e.target.value })}
         />
       </div>
       <div className="grid gap-2">

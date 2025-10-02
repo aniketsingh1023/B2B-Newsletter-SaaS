@@ -10,7 +10,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 export default function NewsletterPage() {
   const [value, setValue] = useState<EditorValue>({
     subject: "",
-    body: "",
+    shortBody: "",
+    longBody: "",
     cta: "",
   })
 

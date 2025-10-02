@@ -1,4 +1,4 @@
-import type { Newsletter } from "./alchemyst"
+import type { Newsletter } from "./newsletterAgent"
 
 export function newsletterToHTML(n: Newsletter): string {
   // Minimal semantic HTML; safe for email export starting point
@@ -19,7 +19,9 @@ export function newsletterToHTML(n: Newsletter): string {
   <body>
     <main class="container">
       <h1>${escapeHtml(n.subject)}</h1>
-      ${paragraphsToHtml(n.body)}
+      ${paragraphsToHtml(n.shortBody)}
+      br
+      ${paragraphsToHtml(n.longBody)}
       <p><a class="cta" href="#">${escapeHtml(n.cta)}</a></p>
     </main>
   </body>
@@ -29,7 +31,9 @@ export function newsletterToHTML(n: Newsletter): string {
 export function newsletterToMarkdown(n: Newsletter): string {
   return `# ${n.subject}
 
-${n.body}
+${n.shortBody}
+
+${n.longBody}
 
 **Call to Action:** ${n.cta}
 `
